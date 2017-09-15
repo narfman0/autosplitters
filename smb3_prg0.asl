@@ -1,24 +1,11 @@
 state("fceux")
 {
-	byte world : 0x0727
-}
-
-start
-{
+	byte world : 0x3B1388, 0x727;
 }
 
 split
 {
-
 	return settings["worlds"] && old.world != current.world;
-}
-
-gameTime
-{
-}
-
-init
-{
 }
 
 startup
