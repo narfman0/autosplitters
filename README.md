@@ -25,6 +25,7 @@ Settings:
 
 `Worlds`: enable autosplit on world changes. e.g.: 1->2, 2->3, neither starting game nor door reveal
 `Bowser Door`: enable autosplit after bowser's door 'poofs' and is enterable
+`Start Enable`: enable starting splits upon pressing 'start' to begin a run (commonly the standard for run categories)
 
 License
 -------
