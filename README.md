@@ -24,6 +24,7 @@ Super Mario Bros 3 (PRG0 or PRG1)
 Settings:
 
 `Worlds`: enable autosplit on world changes. e.g.: 1->2, 2->3, neither starting game nor door reveal
+`Bowser Door`: enable autosplit after bowser's door 'poofs' and is enterable
 
 License
 -------
