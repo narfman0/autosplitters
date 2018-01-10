@@ -1,3 +1,5 @@
+NOT FINISHED; STILL ONLY COPY OF ORIGINAL
+
 Super Mario Bros 3 (tested w/ PRG1)
 ---------------------------------
 using code from narfman0
