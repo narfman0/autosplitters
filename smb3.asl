@@ -12,7 +12,7 @@ state("fceux")
 
 split
 {
-	return (settings["worlds"] && old.world != current.world) ||
+	return (settings["worlds"] && ((settings["warp"] || current.world != 8) && old.world != current.world)) ||
 		(settings["bowserDoor"] && old.bowserDoor1 == 0 && current.bowserDoor1 == 1 && old.bowserDoor2 == 58 && current.bowserDoor2 == 62) ||
 		(settings["princess"] && old.princess1 == 77 && current.princess1 == 0 && old.princess2 == 176 && current.princess2 == 0 && old.princess3 == 152 && current.princess3 == 0);
 }
@@ -30,6 +30,8 @@ startup
 	settings.SetToolTip("start", "Enable start button to start timer from main screen");
 	settings.Add("bowserDoor", false, "Bowser Door Opens (non-WW finish)");
 	settings.SetToolTip("bowserDoor", "Split after Bowser's chamber door opens and is enterable (before seeing Peach's chamber.)");
+	settings.Add("warp", false, "Split upon entering warp world");
+	settings.SetToolTip("warp", "Split upon entering warp world (only usable when splitting on world changes)");
 	settings.Add("princess", false, "Mario appears in princess chamber (WW finish)");
 	settings.SetToolTip("princess", "Experimental: Split upon the first frame of mario in princess' chamber");
 }
