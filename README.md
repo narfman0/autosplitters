@@ -21,6 +21,11 @@ Steps:
 Super Mario Bros 3 (PRG0 or PRG1)
 ---------------------------------
 
+Compatibility:
+
+* FCEUX 2.2.3
+* Retroarch 1.7.3 / nestopia 1.50
+
 Settings:
 
 `Worlds`: enable autosplit on world changes. e.g.: 1->2, 2->3, 1->warp zone, warp zone->8. Neither starting game nor door reveal

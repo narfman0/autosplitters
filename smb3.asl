@@ -1,5 +1,6 @@
 state("fceux")
 {
+    // base address = 0x7B1388
 	byte world : 0x3B1388, 0x727;
 	byte bowserDoor1 : 0x3B1388, 0x2;
 	byte bowserDoor2 : 0x3B1388, 0x71D;
@@ -8,9 +9,25 @@ state("fceux")
 	byte princess3 : 0x3B1388, 0x4D2;
 	byte start1 : 0x3B1388, 0x1F4;
 	byte start2 : 0x3B1388, 0x1F7;
-	byte levelComplete : 0x7B1388, 0x5F2;
-	byte largeChest : 0x7B1388, 0x5F2;
-	byte smallChest : 0x7B1388, 0x5F2;
+	byte levelComplete : 0x3B1388, 0x5F2;
+	byte largeChest : 0x3B1388, 0x5F2;
+	byte smallChest : 0x3B1388, 0x5F2;
+}
+
+state("retroarch")
+{
+    // base address = 0x8B2850
+	byte world : 0x4B2850, 0x727;
+	byte bowserDoor1 : 0x4B2850, 0x2;
+	byte bowserDoor2 : 0x4B2850, 0x71D;
+	byte princess1 : 0x4B2850, 0x4D0;
+	byte princess2 : 0x4B2850, 0x4D1;
+	byte princess3 : 0x4B2850, 0x4D2;
+	byte start1 : 0x4B2850, 0x1F4;
+	byte start2 : 0x4B2850, 0x1F7;
+	byte levelComplete : 0x4B2850, 0x5F2;
+	byte largeChest : 0x4B2850, 0x5F2;
+	byte smallChest : 0x4B2850, 0x5F2;
 }
 
 split
@@ -46,4 +63,9 @@ startup
 	settings.SetToolTip("largeChest", "Useful for 1-3 WW");
 	settings.Add("smallChest", false, "Split upon opening small chest");
 	settings.SetToolTip("smallChest", "Useful for World 8 and 1-Tower WW");
+
+	Action<string> DebugOutput = (text) => {
+		print("[Super Mario Bros 3. Autosplitter] "+text);
+	};
+	vars.DebugOutput = DebugOutput;
 }
