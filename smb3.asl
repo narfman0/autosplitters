@@ -1,48 +1,43 @@
-state("fceux")
-{
-    // base address = 0x7B1388
-	byte world : 0x3B1388, 0x727;
-	byte bowserDoor1 : 0x3B1388, 0x2;
-	byte bowserDoor2 : 0x3B1388, 0x71D;
-	byte princess1 : 0x3B1388, 0x4D0;
-	byte princess2 : 0x3B1388, 0x4D1;
-	byte princess3 : 0x3B1388, 0x4D2;
-	byte start1 : 0x3B1388, 0x1F4;
-	byte start2 : 0x3B1388, 0x1F7;
-	byte levelComplete : 0x3B1388, 0x5F2;
-	byte largeChest : 0x3B1388, 0x5F2;
-	byte smallChest : 0x3B1388, 0x5F2;
-}
+state("fceux"){}
+state("retroarch"){}
 
-state("retroarch")
+init
 {
-    // base address = 0x8B2850
-	byte world : 0x4B2850, 0x727;
-	byte bowserDoor1 : 0x4B2850, 0x2;
-	byte bowserDoor2 : 0x4B2850, 0x71D;
-	byte princess1 : 0x4B2850, 0x4D0;
-	byte princess2 : 0x4B2850, 0x4D1;
-	byte princess3 : 0x4B2850, 0x4D2;
-	byte start1 : 0x4B2850, 0x1F4;
-	byte start2 : 0x4B2850, 0x1F7;
-	byte levelComplete : 0x4B2850, 0x5F2;
-	byte largeChest : 0x4B2850, 0x5F2;
-	byte smallChest : 0x4B2850, 0x5F2;
+    int fceuxBaseAddress = 0x3B1388; // 2.2.3
+    int retroarchBaseAddress = 0x4B2850; // 1.7.3 nestopia 1.5.0
+	int emuOffset = memory.ProcessName.ToLower().Contains("fceux") ? fceuxBaseAddress : retroarchBaseAddress;
+
+	vars.watchers = new MemoryWatcherList
+	{
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x727) { Name = "world" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x2) { Name = "bowserDoor1" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x71D) { Name = "bowserDoor2" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x4D0) { Name = "princess1" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x4D1) { Name = "princess2" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x4D2) { Name = "princess3" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x1F4) { Name = "start1" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x1F7) { Name = "start2" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x5F2) { Name = "levelComplete" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x5F2) { Name = "largeChest" },
+		new MemoryWatcher<byte>((IntPtr)emuOffset + 0x5F2) { Name = "smallChest" },
+	};
+	
+	print("Attached to process: " + memory.ProcessName.ToLower());
 }
 
 split
 {
-	return (settings["worlds"] && ((settings["warp"] || current.world != 8) && old.world != current.world)) ||
-		(settings["bowserDoor"] && old.bowserDoor1 == 0 && current.bowserDoor1 == 1 && old.bowserDoor2 == 58 && current.bowserDoor2 == 62) ||
-		(settings["princess"] && old.princess1 == 77 && current.princess1 == 0 && old.princess2 == 176 && current.princess2 == 0 && old.princess3 == 152 && current.princess3 == 0) ||
-		(settings["levelComplete"] && old.levelComplete == 0 && current.levelComplete == 33024) ||
-		(settings["largeChest"] && old.largeChest == 256 && current.largeChest == 257) ||
-		(settings["smallChest"] && old.smallChest == 0 && current.smallChest == 512);
+	return (settings["worlds"] && ((settings["warp"] || vars.watchers["world"].Current != 8) && vars.watchers["world"].Old != vars.watchers["world"].Current)) ||
+		(settings["bowserDoor"] && vars.watchers["bowserDoor1"].Old == 0 && vars.watchers["bowserDoor1"].Current == 1 && vars.watchers["bowserDoor2"].Old == 58 && vars.watchers["bowserDoor2"].Current == 62) ||
+		(settings["princess"] && vars.watchers["princess1"].Old == 77 && vars.watchers["princess1"].Current == 0 && vars.watchers["princess2"].Old == 176 && vars.watchers["princess2"].Current == 0 && vars.watchers["princess3"].Old == 152 && vars.watchers["princess3"].Current == 0) ||
+		(settings["levelComplete"] && vars.watchers["levelComplete"].Old == 0 && vars.watchers["levelComplete"].Current == 33024) ||
+		(settings["largeChest"] && vars.watchers["largeChest"].Old == 256 && vars.watchers["largeChest"].Current == 257) ||
+		(settings["smallChest"] && vars.watchers["smallChest"].Old == 0 && vars.watchers["smallChest"].Current == 512);
 }
 
 start
 {
-	return settings["start"] && old.start1 == 0 && current.start1 == 255 && old.start2 == 0 && current.start2 == 34;
+	return settings["start"] && vars.watchers["start1"].Old == 0 && vars.watchers["start1"].Current == 255 && vars.watchers["start2"].Old == 0 && vars.watchers["start2"].Current == 34;
 }
 
 startup
@@ -68,4 +63,9 @@ startup
 		print("[Super Mario Bros 3. Autosplitter] "+text);
 	};
 	vars.DebugOutput = DebugOutput;
+}
+
+update
+{
+	vars.watchers.UpdateAll(game);
 }
