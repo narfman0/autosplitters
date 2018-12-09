@@ -9,9 +9,8 @@ state("fceux")
 	byte princess3 : 0x3B1388, 0x4D2;
 	byte start1 : 0x3B1388, 0x1F4;
 	byte start2 : 0x3B1388, 0x1F7;
-	byte levelComplete : 0x3B1388, 0x5F2;
-	byte largeChest : 0x3B1388, 0x5F2;
-	byte smallChest : 0x3B1388, 0x5F2;
+	byte largeChestComplete : 0x3B1388, 0x5F2;
+	byte levelMarker : 0x3B1388, 0x5F3;
 }
 
 state("retroarch")
@@ -25,9 +24,8 @@ state("retroarch")
 	byte princess3 : 0x4B2850, 0x4D2;
 	byte start1 : 0x4B2850, 0x1F4;
 	byte start2 : 0x4B2850, 0x1F7;
-	byte levelComplete : 0x4B2850, 0x5F2;
-	byte largeChest : 0x4B2850, 0x5F2;
-	byte smallChest : 0x4B2850, 0x5F2;
+	byte largeChestComplete : 0x4B2850, 0x5F2;
+	byte levelMarker : 0x4B2850, 0x5F3;
 }
 
 split
@@ -35,9 +33,9 @@ split
 	return (settings["worlds"] && ((settings["warp"] || current.world != 8) && old.world != current.world)) ||
 		(settings["bowserDoor"] && old.bowserDoor1 == 0 && current.bowserDoor1 == 1 && old.bowserDoor2 == 58 && current.bowserDoor2 == 62) ||
 		(settings["princess"] && old.princess1 == 77 && current.princess1 == 0 && old.princess2 == 176 && current.princess2 == 0 && old.princess3 == 152 && current.princess3 == 0) ||
-		(settings["levelComplete"] && old.levelComplete == 0 && current.levelComplete == 33024) ||
-		(settings["largeChest"] && old.largeChest == 256 && current.largeChest == 257) ||
-		(settings["smallChest"] && old.smallChest == 0 && current.smallChest == 512);
+		(settings["levelComplete"] && old.levelMarker == 0 && current.levelMarker == 81) ||
+		(settings["largeChest"] && current.levelMarker == 1 && old.largeChestComplete == 0 && current.largeChestComplete == 1) ||
+		(settings["smallChest"] && old.levelMarker == 0 && current.levelMarker == 2);
 }
 
 start
