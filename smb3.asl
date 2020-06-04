@@ -55,12 +55,12 @@ startup
 	settings.SetToolTip("warp", "Split upon entering warp world (only usable when splitting on world changes)");
 	settings.Add("princess", false, "Mario appears in princess chamber (WW finish)");
 	settings.SetToolTip("princess", "Experimental: Split upon the first frame of mario in princess' chamber (inconsistent)");
-	settings.Add("levelComplete", false, "Split upon level completion");
-	settings.SetToolTip("levelComplete", "Level complete upon hitting roulette box only");
-	settings.Add("largeChest", false, "Toad house chests");
-	settings.SetToolTip("largeChest", "Useful for 1-3 WW");
-	settings.Add("smallChest", false, "Split upon opening small chest");
-	settings.SetToolTip("smallChest", "Useful for World 8 and 1-Tower WW");
+	settings.Add("levelComplete", false, "Experimental: Split upon level completion");
+	settings.SetToolTip("levelComplete", "Experimental: Level complete upon hitting roulette box only");
+	settings.Add("largeChest", false, "Experimental: Toad house chests");
+	settings.SetToolTip("largeChest", "Experimental: Useful for 1-3 WW");
+	settings.Add("smallChest", false, "Experimental: Split upon opening small chest");
+	settings.SetToolTip("smallChest", "Experimental: Useful for World 8 and 1-Tower WW");
 
 	Action<string> DebugOutput = (text) => {
 		print("[Super Mario Bros 3. Autosplitter] "+text);
