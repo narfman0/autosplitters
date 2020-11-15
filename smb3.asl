@@ -11,6 +11,7 @@ state("fceux")
 	byte start2 : 0x3B1388, 0x1F7;
 	byte largeChestComplete : 0x3B1388, 0x5F2;
 	byte levelMarker : 0x3B1388, 0x5F3;
+	byte fanFare: 0x3B1388, 0x4E4;
 }
 
 state("retroarch")
@@ -26,6 +27,7 @@ state("retroarch")
 	byte start2 : 0x4B2850, 0x1F7;
 	byte largeChestComplete : 0x4B2850, 0x5F2;
 	byte levelMarker : 0x4B2850, 0x5F3;
+	byte fanFare: 0x4B2850, 0x4E4;
 }
 
 split
@@ -33,9 +35,10 @@ split
 	return (settings["worlds"] && ((settings["warp"] || current.world != 8) && old.world != current.world)) ||
 		(settings["bowserDoor"] && old.bowserDoor1 == 0 && current.bowserDoor1 == 1 && old.bowserDoor2 == 58 && current.bowserDoor2 == 62) ||
 		(settings["princess"] && old.princess1 == 77 && current.princess1 == 0 && old.princess2 == 176 && current.princess2 == 0 && old.princess3 == 152 && current.princess3 == 0) ||
-		(settings["levelComplete"] && old.levelMarker == 0 && current.levelMarker == 81) ||
 		(settings["largeChest"] && current.levelMarker == 1 && old.largeChestComplete == 0 && current.largeChestComplete == 1) ||
-		(settings["smallChest"] && old.levelMarker == 0 && current.levelMarker == 2);
+		(settings["smallChest"] && old.levelMarker == 0 && current.levelMarker == 2) ||
+		//20: Regular end of level, 4: Fortress complete or ship wand
+		(settings["fanFare"] && old.fanFare == 0 && (current.fanFare == 0x20 || current.fanFare == 0x04));
 }
 
 start
@@ -55,12 +58,12 @@ startup
 	settings.SetToolTip("warp", "Split upon entering warp world (only usable when splitting on world changes)");
 	settings.Add("princess", false, "Mario appears in princess chamber (WW finish)");
 	settings.SetToolTip("princess", "Experimental: Split upon the first frame of mario in princess' chamber (inconsistent)");
-	settings.Add("levelComplete", false, "Experimental: Split upon level completion");
-	settings.SetToolTip("levelComplete", "Experimental: Level complete upon hitting roulette box only");
 	settings.Add("largeChest", false, "Experimental: Toad house chests");
 	settings.SetToolTip("largeChest", "Experimental: Useful for 1-3 WW");
 	settings.Add("smallChest", false, "Experimental: Split upon opening small chest");
 	settings.SetToolTip("smallChest", "Experimental: Useful for World 8 and 1-Tower WW");
+	settings.Add("fanFare", false, "Experimental: Split upon level completion (fanfare method)");
+	settings.SetToolTip("fanFare", "Experimental: Split on normal level completion, triggering on music (roulette box, fortress, or ship wand only)");
 
 	Action<string> DebugOutput = (text) => {
 		print("[Super Mario Bros 3. Autosplitter] "+text);
