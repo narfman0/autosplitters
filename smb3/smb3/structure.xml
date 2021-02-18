@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Super Mario Bros. 3</Name>
+  <Screens>
+    <Screen>
+      <Name>Game</Name>
+      <Geometry>
+        <Width>1920</Width>
+        <Height>1080</Height>
+      </Geometry>
+      <WatchZones>
+        <WatchZone>
+          <Name>start</Name>
+          <Geometry>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>1920</Width>
+            <Height>1080</Height>
+          </Geometry>
+          <Watches>
+            <Watcher>
+              <Name>start</Name>
+              <WatchImages>
+                <WatchImage>
+                  <FilePath>imgs\start.png</FilePath>
+                </WatchImage>
+              </WatchImages>
+            </Watcher>
+          </Watches>
+        </WatchZone>
+      </WatchZones>
+    </Screen>
+  </Screens>
+</GameProfile>
