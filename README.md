@@ -10,7 +10,7 @@ up and an ips file to produce a new patched rom file.
 
 Steps:
 
-* [Download <link>](http://livesplit.github.io/downloads/) and run Livesplit
+* [Download](http://livesplit.github.io/downloads/) and run Livesplit
 * Once your layout is loaded, go to "Edit Layout..."
 * Select +
 * Select Control / Scriptable Auto Splitter
@@ -48,7 +48,7 @@ the game profile for Super Mario Bros. 3.
 
 ### OBS
 
-1. Install (OBS Virtualcam)[https://obsproject.com/forum/resources/obs-virtualcam.949/]
+1. Install [OBS Virtualcam](https://obsproject.com/forum/resources/obs-virtualcam.949/)
 2. Within OBS, in your "sources", right click your video input. This might be an elgato capture card, emulator, or other video feed.
 3. Click "Filters"
 4. In "Effect Filters", click Add, VirtualCam
@@ -57,7 +57,7 @@ the game profile for Super Mario Bros. 3.
 ### Livesplit
 
 * Download this repository and save the game profile somewhere reasonable (like in your livesplit directory)
-* Follow the (Livesplit VideoAutoSplit Installation directions)[https://github.com/ROMaster2/LiveSplit.VideoAutoSplit?ts=2#installation]
+* Follow the [Livesplit VideoAutoSplit Installation directions](https://github.com/ROMaster2/LiveSplit.VideoAutoSplit?ts=2#installation)
   * During installation step 6 "the game profile you wish to use", select the `*.vas` game profile saved previously.
   * During installation step 7, select the component you named in OBS/step 5.
   * During installation step 8, you might need to restart livesplit.
