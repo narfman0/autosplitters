@@ -20,8 +20,8 @@ Steps:
 
 ### Compatibility
 
-* FCEUX 2.2.3
-* Retroarch 1.7.3 / nestopia 1.50
+* FCEUX 2.2.3, 2.6.4
+* nestopia 1.51.1
 
 ### Settings
 

@@ -1,4 +1,4 @@
-state("fceux")
+state("fceux", "2.2.3")
 {
     // base address = 0x7B1388
 	byte world : 0x3B1388, 0x727;
@@ -14,20 +14,39 @@ state("fceux")
 	byte fanFare: 0x3B1388, 0x4E4;
 }
 
-state("retroarch")
+state("fceux", "2.6.4")
 {
-    // base address = 0x8B2850
-	byte world : 0x4B2850, 0x727;
-	byte bowserDoor1 : 0x4B2850, 0x2;
-	byte bowserDoor2 : 0x4B2850, 0x71D;
-	byte princess1 : 0x4B2850, 0x4D0;
-	byte princess2 : 0x4B2850, 0x4D1;
-	byte princess3 : 0x4B2850, 0x4D2;
-	byte start1 : 0x4B2850, 0x1F4;
-	byte start2 : 0x4B2850, 0x1F7;
-	byte largeChestComplete : 0x4B2850, 0x5F2;
-	byte levelMarker : 0x4B2850, 0x5F3;
-	byte fanFare: 0x4B2850, 0x4E4;
+	// base address = 0x3DA4EC
+	byte world : 0x3DA4EC, 0x727;
+	byte bowserDoor1 : 0x3DA4EC, 0x2;
+	byte bowserDoor2 : 0x3DA4EC, 0x71D;
+	byte princess1 : 0x3DA4EC, 0x4D0;
+	byte princess2 : 0x3DA4EC, 0x4D1;
+	byte princess3 : 0x3DA4EC, 0x4D2;
+	byte start1 : 0x3DA4EC, 0x1F4;
+	byte start2 : 0x3DA4EC, 0x1F7;
+	byte largeChestComplete : 0x3DA4EC, 0x5F2;
+	byte levelMarker : 0x3DA4EC, 0x5F3;
+	byte fanFare: 0x3DA4EC, 0x4E4;
+	byte whistleWorld1: 0x3DA4EC, 0x88;
+}
+
+// https://github.com/periwinkle9/smb-autosplitter for the base address and offset.
+state("nestopia", "1.51.1")
+{
+	// base address = 0x17A8EC, 0, 0x70
+	byte world : 0x17A8EC, 0, 0x797;
+	byte bowserDoor1 : 0x17A8EC, 0, 0x72;
+	byte bowserDoor2 : 0x17A8EC, 0, 0x78D;
+	byte princess1 : 0x17A8EC, 0, 0x540;
+	byte princess2 : 0x17A8EC, 0, 0x541;
+	byte princess3 : 0x17A8EC, 0, 0x542;
+	byte start1 : 0x17A8EC, 0, 0x264;
+	byte start2 : 0x17A8EC, 0, 0x267;
+	byte largeChestComplete : 0x17A8EC, 0, 0x662;
+	byte levelMarker : 0x17A8EC, 0, 0x663;
+	byte fanFare: 0x17A8EC, 0, 0x554;
+	byte whistleWorld1: 0x17A8EC, 0, 0x0F8;
 }
 
 split
@@ -38,7 +57,8 @@ split
 		(settings["largeChest"] && current.levelMarker == 1 && old.largeChestComplete == 0 && current.largeChestComplete == 1) ||
 		(settings["smallChest"] && old.levelMarker == 0 && current.levelMarker == 2) ||
 		//20: Regular end of level, 4: Fortress complete or ship wand
-		(settings["fanFare"] && old.fanFare == 0 && (current.fanFare == 0x20 || current.fanFare == 0x04));
+		(settings["fanFare"] && old.fanFare == 0 && (current.fanFare == 0x20 || current.fanFare == 0x04)) ||
+		(settings["whistleWorld1"] && (current.world == 0 && (current.whistleWorld1 == 0x6C && old.whistleWorld1 != 0x5E)));
 }
 
 start
@@ -61,9 +81,11 @@ startup
 	settings.Add("largeChest", false, "Experimental: Toad house chests");
 	settings.SetToolTip("largeChest", "Experimental: Useful for 1-3 WW");
 	settings.Add("smallChest", false, "Experimental: Split upon opening small chest");
-	settings.SetToolTip("smallChest", "Experimental: Useful for World 8 and 1-Tower WW");
+	settings.SetToolTip("smallChest", "Experimental: Useful for World 8 and 1-Fortress WW");
 	settings.Add("fanFare", false, "Experimental: Split upon level completion (fanfare method)");
 	settings.SetToolTip("fanFare", "Experimental: Split on normal level completion, triggering on music (roulette box, fortress, or ship wand only)");
+	settings.Add("whistleWorld1", false, "Experimental: Split upon whistling on 1-Fortress");
+	settings.SetToolTip("whistleWorld1", "Experimental: Split when whistle whirlwind overlaps 1-Fortress, useful for NWW%, any%");
 
 	Action<string> DebugOutput = (text) => {
 		print("[Super Mario Bros 3. Autosplitter] "+text);
