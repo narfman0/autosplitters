@@ -31,8 +31,9 @@ state("fceux", "2.6.4")
 	byte whistleWorld1: 0x3DA4EC, 0x88;
 }
 
+// Nestopia UE 1.51.1, 1.52.0, and 1.52.1 have the same base RAM address
 // https://github.com/periwinkle9/smb-autosplitter for the base address and offset.
-state("nestopia", "1.51.1")
+state("nestopia", "1.51.1/1.52.x")
 {
 	// base address = 0x17A8EC, 0, 0x70
 	byte world : 0x17A8EC, 0, 0x797;
