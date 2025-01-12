@@ -50,6 +50,23 @@ state("nestopia", "1.51.1/1.52.x")
 	byte whistleWorld1: 0x17A8EC, 0, 0xF8;
 }
 
+state("nestopia", "1.53.0")
+{
+	// base address = 0x17B8EC, 0, 0x70
+	byte world : 0x17B8EC, 0, 0x797;
+	byte bowserDoor1 : 0x17B8EC, 0, 0x72;
+	byte bowserDoor2 : 0x17B8EC, 0, 0x78D;
+	byte princess1 : 0x17B8EC, 0, 0x540;
+	byte princess2 : 0x17B8EC, 0, 0x541;
+	byte princess3 : 0x17B8EC, 0, 0x542;
+	byte start1 : 0x17B8EC, 0, 0x264;
+	byte start2 : 0x17B8EC, 0, 0x267;
+	byte largeChestComplete : 0x17B8EC, 0, 0x662;
+	byte levelMarker : 0x17B8EC, 0, 0x663;
+	byte fanFare: 0x17B8EC, 0, 0x554;
+	byte whistleWorld1: 0x17B8EC, 0, 0xF8;
+}
+
 state("Mesen", "0.0.6")
 {
 	// base 0x0000 address of ROM: "MesenCore.dll", 0x42FA9C0, 0xB8, 0x58, 0
@@ -65,6 +82,23 @@ state("Mesen", "0.0.6")
 	byte levelMarker   : "MesenCore.dll", 0x42FA9C0, 0xB8, 0x58, 0x5F3;
 	byte fanFare   : "MesenCore.dll", 0x42FA9C0, 0xB8, 0x58, 0x4E4;
 	byte whistleWorld1   : "MesenCore.dll", 0x42FA9C0, 0xB8, 0x58, 0x88;
+}
+
+state("Mesen", "0.0.7")
+{
+	// base 0x0000 address of ROM: "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0
+	byte world   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x727;
+	byte bowserDoor1   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x2;
+	byte bowserDoor2   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x71D;
+	byte princess1   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x4D0;
+	byte princess2   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x4D1;
+	byte princess3   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x4D2;
+	byte start1   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x1F4;
+	byte start2   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x1F7;
+	byte largeChestComplete   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x5F2;
+	byte levelMarker   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x5F3;
+	byte fanFare   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x4E4;
+	byte whistleWorld1   : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x88;
 }
 
 split
